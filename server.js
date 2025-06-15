@@ -1,4 +1,3 @@
-
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
@@ -7,7 +6,6 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 
 console.log('Starting server...');
-dotenv.config();
 
 if (!process.env.MONGO_URI) {
   console.error('Error: MONGO_URI is not defined in .env file');
@@ -22,7 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
   });
 
 const app = express();
-app.use(cors());
+app.use(cors({ origin: 'https://your-vercel-app.vercel.app' })); // Replace with your Vercel frontend URL
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
